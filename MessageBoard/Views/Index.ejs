@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>The Dojo Message Board</h1>
+    <form action="/post" method="post">
+        <h4>Name:</h4>
+        <input type="text" name='name'>
+        <br>
+        <br>
+        <h4>Message:</h4>
+        <textarea name="message" rows="8" cols="40"></textarea>
+        <br>
+        <br>
+        <input type="submit" value="Post Message">
+    </form>
+    <% if (typeof(errors) !== 'undefined'){ %>
+        <% for(let x in errors) { %>
+            <h2>
+                <%= errors[x].message %>
+            </h2>
+            <% } %>
+                <% } else { %>
+                    <% for (let y of post) { %>
+                        <h2>Name:
+                            <%= y.name %>
+                        </h2>
+                        <h2>Post:
+                            <%= y.message %>
+                        </h2>
+                        <% for(let z of y._comments) { %>
+                            <h4>
+                                <%="Name: " + z.name %>
+                            </h4>
+                            <h4>
+                                <%="Comment: " + z.comment %>
+                            </h4>
+                            <% } %>
+                                <form action="/post/<%= y._id %>" method="post">
+                                    <p>Name: </p><input type="text" name="name">
+                                    <p>Comment: </p><textarea name="comment"></textarea>
+                                    <input type="submit" value="Post comment">
+                                </form>
+                                <% } %>
+                                    <% } %>
+
+</body>
+
+</html>

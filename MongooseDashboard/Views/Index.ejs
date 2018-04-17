@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <h1>Mongoose Dashboard</h1>
+    <form action="/new" method='get'>
+
+        <input type="submit" value="Add new Mongoose">
+    </form>
+    <% for(let x of mDs){ %>
+        <h3>Name:
+            <a href="<%= x.id %>">
+                <%= x.name %>
+            </a>
+        </h3>
+        <h3>Age:
+            <%= x.age %>
+        </h3>
+        <h4>
+            Time Created At:
+            <%= x.createdAt %>
+                <br>
+                <br> Last Updated At:
+                <%= x.updatedAt %>
+        </h4>
+        <a href="/<%= x._id %>/edit/"><button>Edit Mongoose</button></a>
+        <br>
+        <br>
+        <form action="/<%= x._id %>/delete/" method='post'>
+            <input type="submit" value="Delete">
+        </form>
+        <% } %>
+</body>
+
+</html>
